@@ -1,6 +1,6 @@
-module github.com/infracraft-cloud/infractl
+module github.com/mariusmatioc/infractl
 
-go 1.21.0
+go 1.22.0
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.39
