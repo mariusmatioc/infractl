@@ -1,0 +1,29 @@
+# docker-compose.yml
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=$RABBITMQ_USER
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PWD}
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - 5672:5672
+    restart: on-failure
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+    environment:
+      - RABBITMQ_USER=$RABBITMQ_USER
+      - RABBITMQ_PASS=${RABBITMQ_PWD}
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy

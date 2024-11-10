@@ -1,0 +1,17 @@
+craft:
+  recipe_version: 0.1.0
+  type: network
+  craft_name: basic
+  infra_env_files: [your-infra-env]	    # infrastructure related environment files, such as AWS credentials
+
+network:
+  cluster_name: t3
+  vpc_cidr: 10.0.0.0/16
+  # One of vpc_id or vpc_cidr is required
+  #vpc_id: vpc-0bc0ec9e9ddbc0ef7 # Uses existing VPC if it exists
+
+credentials:
+  AWS_ACCESS_KEY_ID: infra_env.AWS_ACCESS_KEY_ID  # optional, looks at infra_env if not specified.
+  AWS_SECRET_ACCESS_KEY: infra_env.AWS_SECRET_ACCESS_KEY  # optional, looks at infra_env if not specified.
+  AWS_DEFAULT_REGION: infra_env.AWS_DEFAULT_REGION  # optional, looks at infra_env if not specified.
+

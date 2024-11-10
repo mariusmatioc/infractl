@@ -1,0 +1,8 @@
+craft:
+  recipe_version: 0.1.0
+  type: ecs
+  docker_compose_files: ["src/docker-compose-backend.yml"]
+  network_craft_file: net.yml
+
+simple_ecs:
+  type: fargate  # fargate or EC2

@@ -1,0 +1,28 @@
+craft:
+  recipe_version: 0.1.0
+  type: ecs
+  craft_name: rabbitmq-example
+  infra_env_files: [your-infra-env]	    # infrastructure related environment files, such as AWS credentials
+  compose_env_files: [".env"]
+  docker_compose_files: [your-docker-compose-file]
+  network_craft_file: net.yml
+
+simple_ecs:
+  type: fargate  # fargate or EC2
+  services:
+    app:  # this should match the service name from docker-compose.yml
+      desired_nodes: 1  # required
+      cpu: 1  # required if type=fargate, in vCPU units
+      memory: 500  # required if type=fargate, in MiB units
+
+simple_mqs:
+  services:
+    rabbitmq:  # this should match the service name from docker-compose.yml
+      engine: RabbitMQ  # required
+      public: true
+
+credentials:
+  AWS_ACCESS_KEY_ID: infra_env.AWS_ACCESS_KEY_ID  # optional, looks at infra_env if not specified.
+  AWS_SECRET_ACCESS_KEY: infra_env.AWS_SECRET_ACCESS_KEY  # optional, looks at infra_env if not specified.
+  AWS_DEFAULT_REGION: infra_env.AWS_DEFAULT_REGION  # optional, looks at infra_env if not specified.
+

@@ -1,0 +1,7 @@
+craft:
+  recipe_version: 0.1.0
+  type: network
+
+network:
+  cluster_name: t3
+  vpc_cidr: 10.0.0.0/16

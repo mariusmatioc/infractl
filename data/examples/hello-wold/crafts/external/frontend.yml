@@ -1,0 +1,26 @@
+craft:
+  recipe_version: 0.1.0
+  type: ecs
+  docker_compose_files: ["src/docker-compose-frontend.yml"]
+  network_craft_file: net.yml # optional, if relative then to the location of this file
+
+simple_ecs:
+  type: fargate  # fargate or EC2
+
+  services:
+    frontend:  # this should match the service name from docker-compose.yml
+      desired_nodes: 1  # required
+      cpu: 2  # required if type=fargate, in vCPU units
+      memory: 1000  # required if type=fargate, in MiB units
+      environment:
+        BACKEND_HOST: externals.backend.backend
+
+      domain_name: hello.infracraft.dev  # optional, enables DNS record creation and certificate if load_balancer_port is 443
+      load_balancer_http:
+        - 80:8080
+      load_balancer_https:
+        - 443:8080
+
+externals:
+  - name: backend
+    craft_file: backend.yml # if relative, then to the location of this file

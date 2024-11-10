@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: back
+    ports:
+      - 1234
+
+  frontend:
+    build:
+      context: front
+    environment:
+      - BACKEND_HOST=backend
+    ports:
+      - 80:8080
+    depends_on:
+      - backend

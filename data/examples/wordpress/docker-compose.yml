@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.0.27
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - db.env
+    expose:
+      - 3306
+      - 33060
+
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - wp_data:/var/www/html
+    ports:
+      - 80:80
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+    env_file:
+      - wordpress.env
+
+volumes:
+  db_data:
+  wp_data:
