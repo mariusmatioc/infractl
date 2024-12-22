@@ -1,6 +1,7 @@
 # infractl
 A command line utility to provision and deploy docker-compose files in the cloud using Terraform as the deployment tool.  
 Currently limited to deploying to AWS, ECS (Fargate services) and lambdas.  
+The idea is that one developes locally using docler compose, sets up a few config files for infractl, then deploys to AWS using the infractl CLU. This assumes one has a AWS account.  
 <!-- TOC -->
 * [infractl](#infractl)
     * [Build From Source](#build-from-source)
